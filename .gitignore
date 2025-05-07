@@ -41,3 +41,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Backend related files
+# Ingore the vyp.db
+backend/vyp-db/vyp.db
