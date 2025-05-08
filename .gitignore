@@ -42,5 +42,26 @@ testem.log
 Thumbs.db
 
 # Backend related files
-# Ingore the vyp.db
 backend/vyp-db/vyp.db
+
+# Virtual environment
+env/
+venv/
+ENV/
+*.env
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Django migrations
+**/migrations/
+!**/migrations/__init__.py
+
+# SQLite DB
+db.sqlite3
+*.sqlite3
