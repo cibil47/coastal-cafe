@@ -7,10 +7,16 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name
 
+class Category(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
+
 class Food(models.Model):
     name = models.CharField(max_length=100)
     price = models.IntegerField()
-    category = models.CharField(max_length=50, blank=True, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     ingredients = models.ManyToManyField(
         Ingredient,
         through='FoodIngredient',
