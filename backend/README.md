@@ -28,6 +28,7 @@ pip3 install -r requirements.txt
 ```bash
 python3 manage.py makemigrations
 python3 manage.py migrate
+python3 manage.py load_food_items food_items.json
 ```
 
 ### 5. Create Superuser
