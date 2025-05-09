@@ -68,3 +68,23 @@ class FoodIngredient(models.Model):
 
     def __str__(self):
         return f"{self.quantity}x {self.ingredient.name} in {self.food.name}"
+
+
+class ExpenseCategory(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+class Expense(models.Model):
+    name = models.CharField(max_length=100)
+    category = models.ForeignKey(ExpenseCategory, on_delete=models.SET_NULL, null=True, blank=True)
+    amount = models.IntegerField()
+    description = models.TextField(blank=True, null=True)
+    date = models.DateField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.name} - {self.amount} on {self.date}"
+
+    class Meta:
+        ordering = ['-date']  # Show the latest expense first
