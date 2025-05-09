@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib import admin
-from .models import Food, Ingredient, FoodIngredient, Category
+from .models import Food, Ingredient, FoodIngredient
+from .models import FoodCategory
+from .models import IngredientCategory
 
 class FoodAdminForm(forms.ModelForm):
     class Meta:
@@ -31,13 +33,17 @@ class FoodAdmin(admin.ModelAdmin):
     autocomplete_fields = ['category']
     inlines = [FoodIngredientInline]
 
+@admin.register(IngredientCategory)
+class IngredientCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
 @admin.register(Ingredient)
 class IngredientAdmin(admin.ModelAdmin):
     form = IngredientAdminForm
-    list_display = ('name', 'cost')
-    search_fields = ('name',)
+    list_display = ('name', 'cost', 'unit', 'category')
+    search_fields = ('name', 'category__name')
+    list_filter = ('category',)
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+@admin.register(FoodCategory)
+class FoodCategoryAdmin(admin.ModelAdmin):
     search_fields = ('name',)
-
